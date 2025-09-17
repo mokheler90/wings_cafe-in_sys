@@ -9,7 +9,7 @@ import Reporting from './components/Reporting';
 import Footer from './components/Footer';
 import './App.css';
 
-const API_URL = process.env.REACT_APP_API_URL; // ✅ Add base URL
+const API_URL = process.env.REACT_APP_API_URL;
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -63,7 +63,7 @@ function App() {
                 products={products} 
                 sales={sales} 
                 inventoryStatus={inventoryStatus} 
-                apiUrl={API_URL} // pass to child
+                apiUrl={API_URL}
               />
             } />
             <Route path="/products" element={
@@ -82,15 +82,10 @@ function App() {
               />
             } />
             <Route path="/inventory" element={
-              <Inventory 
-                inventoryStatus={inventoryStatus} 
-              />
+              <Inventory inventoryStatus={inventoryStatus} />
             } />
             <Route path="/reports" element={
-              <Reporting 
-                products={products} 
-                sales={sales} 
-              />
+              <Reporting products={products} sales={sales} />
             } />
           </Routes>
         </div>
