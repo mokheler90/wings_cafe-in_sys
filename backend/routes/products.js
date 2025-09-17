@@ -4,7 +4,8 @@ const path = require('path');
 const multer = require('multer'); // NEW
 const router = express.Router();
 
-const dataPath = path.join(__dirname, '../data/database.json');
+const dataPath = process.env.DATABASE_FILE || path.join(__dirname, '../data/database.json');
+
 
 // NEW: Configure multer for file uploads
 const storage = multer.diskStorage({
