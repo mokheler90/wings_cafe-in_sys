@@ -15,7 +15,8 @@ function App() {
   const [inventoryStatus, setInventoryStatus] = useState({});
 
   // Backend base URL from environment variable
-  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:10000";
+  // Make sure this has NO trailing slash
+  const BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchProducts();
