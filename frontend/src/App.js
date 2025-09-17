@@ -14,15 +14,19 @@ function App() {
   const [sales, setSales] = useState([]);
   const [inventoryStatus, setInventoryStatus] = useState({});
 
+  // Backend base URL from environment variable
+  const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:10000";
+
   useEffect(() => {
     fetchProducts();
     fetchRecentSales();
     fetchInventoryStatus();
   }, []);
 
+  // Fetch all products
   const fetchProducts = async () => {
     try {
-      const response = await fetch('/api/products');
+      const response = await fetch(`${BASE_URL}/api/products`);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -30,9 +34,10 @@ function App() {
     }
   };
 
+  // Fetch recent sales (last 10)
   const fetchRecentSales = async () => {
     try {
-      const response = await fetch('/api/sales/recent');
+      const response = await fetch(`${BASE_URL}/api/sales/recent`);
       const data = await response.json();
       setSales(data);
     } catch (error) {
@@ -40,9 +45,10 @@ function App() {
     }
   };
 
+  // Fetch inventory status (low stock)
   const fetchInventoryStatus = async () => {
     try {
-      const response = await fetch('/api/inventory/status');
+      const response = await fetch(`${BASE_URL}/api/inventory/status`);
       const data = await response.json();
       setInventoryStatus(data);
     } catch (error) {
