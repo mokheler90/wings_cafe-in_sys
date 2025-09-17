@@ -9,14 +9,12 @@ import Reporting from './components/Reporting';
 import Footer from './components/Footer';
 import './App.css';
 
+const API_URL = process.env.REACT_APP_API_URL; // ✅ Add base URL
+
 function App() {
   const [products, setProducts] = useState([]);
   const [sales, setSales] = useState([]);
   const [inventoryStatus, setInventoryStatus] = useState({});
-
-  // Backend base URL from environment variable
-  // Make sure this has NO trailing slash
-  const BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     fetchProducts();
@@ -24,10 +22,9 @@ function App() {
     fetchInventoryStatus();
   }, []);
 
-  // Fetch all products
   const fetchProducts = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/api/products`);
+      const response = await fetch(`${API_URL}/api/products`);
       const data = await response.json();
       setProducts(data);
     } catch (error) {
@@ -35,10 +32,9 @@ function App() {
     }
   };
 
-  // Fetch recent sales (last 10)
   const fetchRecentSales = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/api/sales/recent`);
+      const response = await fetch(`${API_URL}/api/sales/recent`);
       const data = await response.json();
       setSales(data);
     } catch (error) {
@@ -46,10 +42,9 @@ function App() {
     }
   };
 
-  // Fetch inventory status (low stock)
   const fetchInventoryStatus = async () => {
     try {
-      const response = await fetch(`${BASE_URL}/api/inventory/status`);
+      const response = await fetch(`${API_URL}/api/inventory/status`);
       const data = await response.json();
       setInventoryStatus(data);
     } catch (error) {
@@ -68,12 +63,14 @@ function App() {
                 products={products} 
                 sales={sales} 
                 inventoryStatus={inventoryStatus} 
+                apiUrl={API_URL} // pass to child
               />
             } />
             <Route path="/products" element={
               <ProductManagement 
                 products={products} 
                 onUpdate={fetchProducts} 
+                apiUrl={API_URL}
               />
             } />
             <Route path="/sales" element={
@@ -81,6 +78,7 @@ function App() {
                 products={products} 
                 onSale={fetchProducts} 
                 onUpdateSales={fetchRecentSales} 
+                apiUrl={API_URL}
               />
             } />
             <Route path="/inventory" element={
