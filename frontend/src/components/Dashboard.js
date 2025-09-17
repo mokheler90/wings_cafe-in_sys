@@ -8,7 +8,6 @@ const Dashboard = ({ products, sales, inventoryStatus, apiUrl }) => {
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
-      
       <div className="stats-container">
         <div className="stat-card">
           <h3>Total Products</h3>
@@ -48,9 +47,7 @@ const Dashboard = ({ products, sales, inventoryStatus, apiUrl }) => {
                 ))}
               </tbody>
             </table>
-          ) : (
-            <p>No recent sales</p>
-          )}
+          ) : <p>No recent sales</p>}
         </div>
 
         <div className="dashboard-section">
@@ -75,9 +72,7 @@ const Dashboard = ({ products, sales, inventoryStatus, apiUrl }) => {
                 </div>
               ))}
             </div>
-          ) : (
-            <p>No products in inventory</p>
-          )}
+          ) : <p>No products in inventory</p>}
         </div>
       </div>
     </div>
