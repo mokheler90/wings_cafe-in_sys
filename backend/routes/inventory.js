@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 
-const dataPath = path.join(__dirname, '../data/database.json');
+const dataPath = process.env.DATABASE_FILE || path.join(__dirname, '../data/database.json');
+
 
 // Helper functions (same as in products.js)
 const readData = () => {
