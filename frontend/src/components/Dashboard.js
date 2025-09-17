@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Dashboard = ({ products, sales, inventoryStatus }) => {
+const Dashboard = ({ products, sales, inventoryStatus, apiUrl }) => {
   const totalProducts = products.length;
   const totalSales = sales.reduce((sum, sale) => sum + sale.totalAmount, 0);
   const lowStockCount = inventoryStatus.lowStockCount || 0;
@@ -14,12 +14,10 @@ const Dashboard = ({ products, sales, inventoryStatus }) => {
           <h3>Total Products</h3>
           <p className="stat-number">{totalProducts}</p>
         </div>
-        
         <div className="stat-card">
           <h3>Total Sales</h3>
           <p className="stat-number">M{totalSales.toFixed(2)}</p>
         </div>
-        
         <div className="stat-card">
           <h3>Low Stock Items</h3>
           <p className="stat-number">{lowStockCount}</p>
@@ -63,7 +61,7 @@ const Dashboard = ({ products, sales, inventoryStatus }) => {
                 <div key={product.id} className="product-card">
                   {product.imageUrl && (
                     <div className="product-image">
-                      <img src={product.imageUrl} alt={product.name} />
+                      <img src={`${apiUrl}${product.imageUrl}`} alt={product.name} />
                     </div>
                   )}
                   <div className="product-info">
